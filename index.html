@@ -3,110 +3,796 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KuikoART - Arte, manualidades y talleres para transformar tu hogar">
   <title>KuikoART - Arte y Diseño a tu Hogar</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    /* Estilos adicionales para la sección especial */
-    .especial-semana {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 15px;
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* Variables CSS para consistencia */
+    :root {
+      --primary-color: #d35400;
+      --secondary-color: #3498db;
+      --dark-color: #333;
+      --light-color: #f9f9f9;
+      --font-main: 'Arial', sans-serif;
     }
-    
-    .especial-contenido {
+
+    /* Reset y estilos base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      line-height: 1.6;
+      color: var(--dark-color);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Botones */
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: bold;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+      border: 2px solid var(--primary-color);
+    }
+
+    .btn-primary:hover {
+      background-color: transparent;
+      color: var(--primary-color);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-color);
+      color: white;
+      border: 2px solid var(--secondary-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: transparent;
+      color: var(--secondary-color);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    /* WhatsApp Float */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #25D366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 100;
       display: flex;
       align-items: center;
-      gap: 20px;
+      justify-content: center;
+      transition: all 0.3s ease;
     }
-    
-    .especial-contenido img {
-      width: 200px;
-      height: auto;
-      border-radius: 5px;
+    .whatsapp-float:hover {
+      background-color: #128C7E;
+      transform: scale(1.1);
     }
-    
-    .especial-texto h2 {
-      color: #d35400;
-      margin-bottom: 10px;
+
+    /* Hero section */
+    .hero {
+      position: relative;
+      height: 80vh;
+      background: url('kuikoart-portada.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+
+    .logo img {
+      height: 50px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      font-weight: bold;
+      position: relative;
+      padding: 5px 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links .active::after {
+      width: 100%;
+    }
+
+    .mobile-menu {
+      display: none;
       font-size: 1.5rem;
+      cursor: pointer;
     }
-    
-    .especial-texto p {
+
+    /* Sección destacada */
+    .featured-section {
+      padding: 60px 0;
+      background-color: var(--light-color);
+    }
+
+    .featured-card {
+      display: flex;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .featured-image {
+      flex: 1;
+      min-height: 300px;
+    }
+
+    .featured-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .featured-content {
+      flex: 1;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      margin-bottom: 15px;
+    }
+
+    /* Sección información */
+    .info-section {
+      padding: 60px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2rem;
+      color: var(--primary-color);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .info-card {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+
+    .info-card h3 {
+      margin-bottom: 15px;
+      color: var(--dark-color);
+    }
+
+    .info-card p {
+      margin-bottom: 20px;
+    }
+
+    .link {
+      color: var(--primary-color);
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .link:hover {
+      color: var(--secondary-color);
+    }
+
+    /* Slider de colaboradores */
+    .partners-section {
+      padding: 60px 0;
+      background-color: var(--light-color);
+    }
+
+    .slider-container {
+      position: relative;
+      max-width: 100%;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slide {
+      min-width: 200px;
+      padding: 0 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide img {
+      max-height: 100px;
+      width: auto;
+      filter: grayscale(100%);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+
+    .slide img:hover {
+      filter: grayscale(0);
+      opacity: 1;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255,255,255,0.7);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+
+    .slider-btn:hover {
+      background-color: white;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    /* Newsletter */
+    .newsletter {
+      padding: 60px 0;
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+    }
+
+    .newsletter h2 {
+      margin-bottom: 15px;
+      font-size: 2rem;
+    }
+
+    .newsletter p {
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 50px 0 0 50px;
+      font-size: 1rem;
+    }
+
+    .newsletter-form button {
+      border-radius: 0 50px 50px 0;
+      border: none;
+      padding: 12px 24px;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 60px 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .footer-col {
+      margin-bottom: 20px;
+    }
+
+    .footer-logo {
+      max-width: 150px;
+      margin-bottom: 20px;
+    }
+
+    .footer-col h4 {
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col i {
+      margin-right: 10px;
+      color: var(--primary-color);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
       font-size: 0.9rem;
-      line-height: 1.4;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .featured-card {
+        flex-direction: column;
+      }
+      
+      .featured-image {
+        min-height: 200px;
+      }
+      
+      .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        height: 60vh;
+      }
+      
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu {
+        display: block;
+      }
+      
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .newsletter-form {
+        flex-direction: column;
+      }
+      
+      .newsletter-form input,
+      .newsletter-form button {
+        width: 100%;
+        border-radius: 50px;
+      }
+      
+      .newsletter-form button {
+        margin-top: 10px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-content h1 {
+        font-size: 1.8rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Hero Image -->
-  <div class="hero">
-    <img src="kuikoart-portada.jpg" alt="KuikoART Portada" class="hero-img">
-  </div>
+  <!-- Header con Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Transforma tu hogar con arte y creatividad</h1>
+      <p>Talleres, productos exclusivos y comunidad de emprendedores</p>
+      <div class="hero-buttons">
+        <a href="talleres.html" class="btn btn-primary">Ver Talleres</a>
+        <a href="tienda.html" class="btn btn-secondary">Explorar Tienda</a>
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+  </header>
 
-  <!-- Menú de Navegación -->
-  <nav class="botones">
-    <a href="tienda.html">Tienda</a>
-    <a href="talleres.html">Talleres</a>
-    <a href="historias.html">Historias de Vida</a>
-    <a href="catalogo.html">Catálogo</a>
+  <!-- Menú de Navegación con tu logo -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="logo">
+        <img src="kuikoart.jpg" alt="KuikoART" loading="lazy" style="height: 50px;">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Inicio</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="talleres.html">Talleres</a></li>
+        <li><a href="historias.html">Historias</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+      </ul>
+      <div class="mobile-menu">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
   </nav>
 
-  <!-- Sección Especial de la Semana - Versión Mejorada -->
-  <section class="especial-semana">
-    <div class="especial-contenido">
-      <img src="especial.jpg" alt="Programa Especial">
-      <div class="especial-texto">
-        <h2>5 MINUTOS CON LIA</h2>
-        <p>Programa ESPECIAL de manualidades con la profesora Lay y sus invitados. Todos los lunes a las 12 M por Tele Turquino.</p>
-        <p>Disfruta de trucos y secretos exclusivos de manualidades, sorteos y la participación de emprendedoras especializadas. ¡No te lo pierdas!</p>
+  <!-- Sección Especial de la Semana -->
+  <section class="featured-section">
+    <div class="container">
+      <div class="featured-card">
+        <div class="featured-image">
+          <img src="especial.jpg" alt="Programa Especial" loading="lazy">
+        </div>
+        <div class="featured-content">
+          <span class="badge">Nuevo</span>
+          <h2>5 MINUTOS CON LIA</h2>
+          <p>Programa ESPECIAL de manualidades con la profesora Lay y sus invitados. Todos los lunes a las 12 M por Tele Turquino.</p>
+          <p>Disfruta de trucos y secretos exclusivos de manualidades, sorteos y la participación de emprendedoras especializadas.</p>
+          <a href="#" class="btn btn-outline">Ver programa</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Sección Información -->
-  <section class="info">
-    <div class="card">
-      <h2>QUIÉNES SOMOS</h2>
-      <p>Somos un equipo de emprendedores y artistas que hacen de cada espacio un mejor lugar para vivir, donde usted lo sueña y nosotros lo hacemos realidad.</p>
-    </div>
-    <div class="card">
-      <h2>NUESTROS SERVICIOS</h2>
-      <p>No solo ofrecemos talleres y respondemos a los retos artísticos que nos piden. También colaboramos con emprendedores amigos, escalando sus ventas al anunciar sus productos.</p>
-    </div>
-    <div class="card">
-      <h2>COLABORADORES</h2>
-      <p>Hacemos con otros lo que solos no podemos, creando alianzas estratégicas que nos permiten hacer más y cansarnos menos.</p>
-    </div>
-  </section>
-
-  <!-- Slider de Logos - Versión Mejorada -->
-  <section class="logos-slider">
-    <div class="slider-container">
-      <div class="slider-track">
-        <!-- Logos originales -->
-        <img src="kuikoart.jpg" alt="KuikoART" loading="lazy">
-        <img src="lo_de_amalia.jpg" alt="Lo de Amalia" loading="lazy">
-        <img src="art_lia.jpg" alt="Art Lia" loading="lazy">
-        <img src="decoharmony.jpg" alt="Decoharmony" loading="lazy">
-        <!-- Duplicados para efecto infinito -->
-        <img src="kuikoart.jpg" alt="KuikoART" loading="lazy">
-        <img src="lo_de_amalia.jpg" alt="Lo de Amalia" loading="lazy">
-        <img src="art_lia.jpg" alt="Art Lia" loading="lazy">
+  <section class="info-section">
+    <div class="container">
+      <h2 class="section-title">Conoce KuikoART</h2>
+      <div class="info-grid">
+        <article class="info-card">
+          <i class="fas fa-users icon"></i>
+          <h3>QUIÉNES SOMOS</h3>
+          <p>Somos un equipo de emprendedores y artistas que hacen de cada espacio un mejor lugar para vivir, donde usted lo sueña y nosotros lo hacemos realidad.</p>
+        </article>
+        <article class="info-card">
+          <i class="fas fa-hands-helping icon"></i>
+          <h3>NUESTROS SERVICIOS</h3>
+          <p>No solo ofrecemos talleres y respondemos a los retos artísticos que nos piden. También colaboramos con emprendedores amigos, escalando sus ventas al anunciar sus productos.</p>
+        </article>
+        <article class="info-card">
+          <i class="fas fa-handshake icon"></i>
+          <h3>COLABORADORES</h3>
+          <p>Hacemos con otros lo que solos no podemos, creando alianzas estratégicas que nos permiten hacer más y cansarnos menos.</p>
+          <a href="#" class="link">Ver colaboradores</a>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Slider de Logos -->
+  <section class="partners-section">
+    <div class="container">
+      <h2 class="section-title">Nuestros Colaboradores</h2>
+      <div class="slider-container">
+        <div class="slider-track">
+          <div class="slide">
+            <img src="kuikoart.jpg" alt="KuikoART" loading="lazy">
+          </div>
+          <div class="slide">
+            <img src="lo_de_amalia.jpg" alt="Lo de Amalia" loading="lazy">
+          </div>
+          <div class="slide">
+            <img src="art_lia.jpg" alt="Art Lia" loading="lazy">
+          </div>
+          <div class="slide">
+            <img src="decoharmony.jpg" alt="Decoharmony" loading="lazy">
+          </div>
+        </div>
+        <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-content">
+        <h2>Únete a nuestra comunidad</h2>
+        <p>Recibe noticias, promociones especiales y tips de decoración</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Tu correo electrónico" required>
+          <button type="submit" class="btn btn-primary">Suscribirse</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer con tus datos reales -->
   <footer class="footer">
-    <p>© 2025 KuikoART - Todos los derechos reservados</p>
-    <p>Desarrollado por Héctor M. |
-      <a href="https://facebook.com/kuikoart" target="_blank">Facebook</a> |
-      <a href="https://instagram.com/kuikoart" target="_blank">Instagram</a> |
-      <a href="mailto:cmfaponte@gmail.com">cmfaponte@gmail.com</a>
-    </p>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <img src="kuikoart.jpg" alt="KuikoART" class="footer-logo" style="max-height: 80px;">
+          <p>Arte y diseño para transformar tu hogar</p>
+        </div>
+        <div class="footer-col">
+          <h4>Enlaces</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="tienda.html">Tienda</a></li>
+            <li><a href="talleres.html">Talleres</a></li>
+            <li><a href="historias.html">Historias</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><i class="fas fa-envelope"></i> cmfaponte@gmail.com</li>
+            <li><i class="fas fa-phone"></i> +53 53086152</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Redes Sociales</h4>
+          <div class="social-links">
+            <a href="https://www.facebook.com/hector.aponte.avila.2025" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://instagram.com/avilahectoraponte" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 KuikoART - Todos los derechos reservados</p>
+        <p>Desarrollado por Héctor M.</p>
+      </div>
+    </div>
   </footer>
+
+  <!-- Botón flotante de WhatsApp con tu número -->
+  <a href="https://wa.me/5353086152" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Slider functionality
+      const track = document.querySelector('.slider-track');
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const nextBtn = document.querySelector('.next');
+      const prevBtn = document.querySelector('.prev');
+      
+      const slideWidth = slides[0].getBoundingClientRect().width;
+      
+      // Arrange slides
+      slides.forEach((slide, index) => {
+        slide.style.left = slideWidth * index + 'px';
+      });
+      
+      // Move to slide
+      const moveToSlide = (track, currentSlide, targetSlide) => {
+        track.style.transform = 'translateX(-'+targetSlide.style.left+')';
+        currentSlide.classList.remove('current-slide');
+        targetSlide.classList.add('current-slide');
+      }
+      
+      // Event listeners
+      nextBtn.addEventListener('click', function() {
+        const currentSlide = document.querySelector('.current-slide') || slides[0];
+        const nextSlide = currentSlide.nextElementSibling || slides[0];
+        moveToSlide(track, currentSlide, nextSlide);
+      });
+      
+      prevBtn.addEventListener('click', function() {
+        const currentSlide = document.querySelector('.current-slide') || slides[0];
+        const prevSlide = currentSlide.previousElementSibling || slides[slides.length-1];
+        moveToSlide(track, currentSlide, prevSlide);
+      });
+      
+      // Set first slide as current
+      slides[0].classList.add('current-slide');
+      
+      // Mobile menu toggle
+      const mobileMenuBtn = document.querySelector('.mobile-menu');
+      const navLinks = document.querySelector('.nav-links');
+      
+      mobileMenuBtn.addEventListener('click', function() {
+        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+      });
+      
+      // Responsive adjustments
+      function handleResize() {
+        if (window.innerWidth > 768) {
+          navLinks.style.display = 'flex';
+        } else {
+          navLinks.style.display = 'none';
+        }
+      }
+      
+      window.addEventListener('resize', handleResize);
+      handleResize();
+    });
+  </script>
 </body>
 </html>
