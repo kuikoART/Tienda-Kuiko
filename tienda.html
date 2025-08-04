@@ -336,7 +336,10 @@
             background: rgba(0,0,0,0.5);
             z-index: 2000;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Cambiado de center a flex-start para mejor visualización en móviles */
+            padding-top: 20px;
+            padding-bottom: 20px;
+            overflow-y: auto;
         }
 
         .carrito-contenido {
@@ -358,6 +361,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         .carrito-cerrar {
@@ -385,6 +391,7 @@
             align-items: center;
             padding: 1rem 0;
             border-bottom: 1px solid #eee;
+            flex-wrap: wrap;
         }
 
         .carrito-item-img {
@@ -397,11 +404,13 @@
 
         .carrito-item-info {
             flex-grow: 1;
+            min-width: 150px;
         }
 
         .carrito-item-titulo {
             font-weight: bold;
             margin-bottom: 0.3rem;
+            word-break: break-word;
         }
 
         .carrito-item-precio {
@@ -446,6 +455,8 @@
             text-align: right;
             font-size: 1.2rem;
             font-weight: bold;
+            position: sticky;
+            bottom: 0;
         }
 
         /* Formulario de pedido */
@@ -575,12 +586,18 @@
 
             .carrito-contenido {
                 width: 95%;
+                max-height: 85vh;
             }
-        }
 
-        @media (max-width: 480px) {
-            .productos-grid {
-                grid-template-columns: 1fr;
+            /* Mejoras para el formulario en móviles */
+            .formulario-pedido {
+                padding: 1rem;
+            }
+
+            .form-group input, 
+            .form-group select, 
+            .form-group textarea {
+                padding: 0.7rem;
             }
 
             .botones-pedido {
@@ -593,6 +610,35 @@
 
             .shop-hero-content p {
                 font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .productos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .carrito-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .carrito-item-img {
+                margin-bottom: 1rem;
+            }
+
+            .carrito-item-cantidad {
+                margin: 0.5rem 0;
+            }
+
+            .carrito-item-eliminar {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                align-self: flex-end;
+            }
+
+            .shop-hero {
+                height: 250px;
             }
         }
     </style>
@@ -1014,7 +1060,8 @@
         <div class="producto-info">
             <h3 class="producto-titulo">Zapatos tacón fino</h3>
             <p class="producto-precio">Precio aquí</p>
-           á class="add-to-cart">Añadir al carrito</button>
+            <p class="producto-disponibilidad"><i class="fas fa-check-circle"></i> Disponible: 1</p>
+            <button class="add-to-cart">Añadir al carrito</button>
         </div>
     </div>
 
