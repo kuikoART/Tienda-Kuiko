@@ -462,7 +462,8 @@
         /* Formulario de pedido */  
         .formulario-pedido {  
             padding: 1rem; 
-            background: #f9f5ff;  
+            background: #f9f5ff;
+            padding-bottom: 120px; /* Espacio para evitar que el teclado cubra botones */
         }  
 
         .form-group {  
@@ -603,6 +604,13 @@
             background: #f9f5ff;
             border-top: 1px solid #eee;
             border-bottom: 1px solid #eee;
+            position: sticky;
+            bottom: 0;
+            background: white;
+            z-index: 100;
+            padding: 15px;
+            border-top: 1px solid #eee;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
 
         /* Responsive */  
@@ -634,11 +642,12 @@
 
             .carrito-contenido {  
                 width: 95%;  
-                max-height: 80vh;
+                max-height: 85vh; /* Más espacio vertical */
             }  
 
             .formulario-pedido {  
-                padding: 1rem;  
+                padding: 1rem;
+                padding-bottom: 150px; /* Más espacio en móviles */
             }  
 
             .form-group input,   
@@ -657,7 +666,11 @@
 
             .shop-hero-content p {  
                 font-size: 1rem;  
-            }  
+            }
+            
+            .carrito-body {
+                max-height: 40vh; /* Altura reducida para el cuerpo */
+            }
         }  
 
         @media (max-width: 480px) {  
@@ -740,12 +753,8 @@
             }
             
             .carrito-contenido {
-                max-height: 80vh;
+                max-height: 85vh;
                 width: 95%;
-            }
-            
-            .carrito-body {
-                max-height: 50vh;
             }
         }
     </style>
@@ -1701,6 +1710,25 @@
                 imagenModal.style.display = 'none';
             }
         });
+        
+        // SOLUCIÓN AL PROBLEMA DE SCROLL - JavaScript
+        // Controlar el desplazamiento cuando se enfoca el último campo
+        const metodoPagoInput = document.getElementById('metodo-pago');
+        
+        if (metodoPagoInput) {
+            metodoPagoInput.addEventListener('focus', function() {
+                // Desplazar al contenedor de botones
+                setTimeout(() => {
+                    const botonesContainer = document.querySelector('.botones-envio-container');
+                    if (botonesContainer) {
+                        botonesContainer.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'end' 
+                        });
+                    }
+                }, 300);
+            });
+        }
     </script>
 </body>
     </html>
