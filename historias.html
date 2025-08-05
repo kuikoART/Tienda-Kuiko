@@ -2,15 +2,610 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KuikoART - Historias de vida inspiradoras, emprendimientos y solidaridad a través del arte">
     <title>KuikoART - Historias de Vida</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="style-historia.css">
+    <style>
+        /* Estilos optimizados para rendimiento */
+        :root {
+            --primary-color: #8b5a2b;
+            --secondary-color: #d4a76a;
+            --accent-color: #e63946;
+            --light-color: #f8f4e9;
+            --dark-color: #3a2615;
+            --text-color: #333;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            overflow-x: hidden;
+        }
+
+        /* Header optimizado */
+        .main-header {
+            background-color: var(--dark-color);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-family: 'Georgia', serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--light-color);
+            text-decoration: none;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .nav-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            padding: 0.5rem;
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover:after,
+        .nav-links a.active:after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--secondary-color);
+        }
+
+        /* Menú hamburguesa para móviles */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Menú de secciones interno */
+        .secciones-menu {
+            background-color: var(--secondary-color);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 70px;
+            z-index: 999;
+            box-shadow: var(--shadow);
+        }
+
+        .secciones-menu ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .secciones-menu a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+
+        .secciones-menu a:hover,
+        .secciones-menu a:focus {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        /* Contenido principal */
+        .historias-vida {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 5%;
+        }
+
+        .seccion-contenido {
+            margin-bottom: 4rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .seccion-titulo {
+            font-family: 'Georgia', serif;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .seccion-titulo:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        /* Palabra Diaria */
+        .palabra-destacada {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .palabra-destacada {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .texto-justificado {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .fecha, .santo, .liturgia {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .lectura-titulo, .salmo-titulo, .evangelio-titulo {
+            font-family: 'Georgia', serif;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-top: 1rem;
+        }
+
+        .referencia {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .versiculo {
+            background-color: rgba(212, 167, 106, 0.1);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .respuesta {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .final-lectura {
+            font-weight: bold;
+            text-align: right;
+            margin-top: 0.5rem;
+        }
+
+        .comentario {
+            background-color: rgba(139, 90, 43, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .comentario-titulo {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .comentario-autor {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .comentario-texto {
+            line-height: 1.7;
+        }
+
+        .imagen-seccion {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            object-fit: cover;
+            max-height: 500px;
+        }
+
+        /* Palabras anteriores */
+        .archivo-palabras h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .palabras-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .palabra-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .palabra-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .palabra-fecha {
+            font-weight: 500;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .palabra-texto {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .palabra-referencia {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Emprendedores */
+        .emprendedor-destacado {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .emprendedor-destacado {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .emprendedor-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .emprendedor-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        /* Relatos Personales */
+        .historias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .historia-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .historia-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .historia-imagen {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .historia-card .texto-justificado {
+            padding: 1.5rem;
+        }
+
+        .historia-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .historia-card blockquote {
+            font-style: italic;
+            border-left: 3px solid var(--secondary-color);
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: #555;
+        }
+
+        /* Red de Solidaridad */
+        .lema {
+            font-size: 1.3rem;
+            font-style: italic;
+            text-align: center;
+            color: var(--primary-color);
+            margin: 1.5rem 0 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .proyecto-destacado {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .proyecto-destacado {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .proyecto-destacado h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .proyecto-destacado ul {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .proyecto-destacado li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        /* Formulario */
+        .formulario-contacto {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(212, 167, 106, 0.2);
+        }
+
+        .btn-enviar {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: block;
+            margin: 1.5rem auto 0;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .btn-enviar:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 3rem 5% 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+
+        .footer-section p, 
+        .footer-section li {
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-section a {
+            color: var(--light-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .footer-section i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 2rem;
+        }
+
+        /* Media Queries para responsividad */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 1rem;
+            }
+
+            .secciones-menu {
+                top: 60px;
+            }
+
+            .secciones-menu ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .seccion-titulo {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Animaciones suaves al desplazarse */
+        @media (prefers-reduced-motion: no-preference) {
+            .seccion-contenido {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+            
+            .seccion-contenido.in-view {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="main-header">
         <nav class="main-nav">
             <a href="index.html" class="logo">KuikoART</a>
+            <button class="menu-toggle" aria-label="Menú de navegación">
+                <i class="fas fa-bars"></i>
+            </button>
             <ul class="nav-links">
                 <li><a href="tienda.html">Tienda</a></li>
                 <li><a href="talleres.html">Talleres</a></li>
@@ -22,7 +617,7 @@
 
     <main class="historias-vida">
         <!-- Menú interno de secciones -->
-        <nav class="secciones-menu">
+        <nav class="secciones-menu" aria-label="Menú de secciones de Historias de Vida">
             <ul>
                 <li><a href="#palabra">Palabra Diaria</a></li>
                 <li><a href="#emprendedores">Emprendedores</a></li>
@@ -35,7 +630,7 @@
         <section id="palabra" class="seccion-contenido">
             <h2 class="seccion-titulo">Palabra Diaria</h2>
             
-            <article class="palabra-destacada">
+            <article class="palabra-destacada" aria-labelledby="palabra-title">
                 <div class="texto-justificado">
                     <p class="fecha">Viernes, 1 de agosto - Ciclo C</p>
                     <p class="santo">San Alfonso M. de Ligorio<br>memoria obligatoria</p>
@@ -49,7 +644,7 @@
                         
                         El día catorce del primer mes, al atardecer, es la Pascua del Señor. El día quince del mismo mes, es la fiesta de los panes ázimos dedicada al Señor. Comeréis panes ázimos durante siete días. El primer día os reuniréis en asamblea litúrgica, y no haréis trabajo alguno. Los siete días ofreceréis oblaciones al Señor. Al séptimo os volveréis a reunir en asamblea litúrgica, y no haréis trabajo alguno.<br><br>
                         
-                        El Señor habló a Moisés: Di a los israelitas: Cuando entréis en la tierra que yo os voy a dar, y seguéis la mies, la primera gavilla se la llevaréis al sacerdote. Éste la agitará ritualmente en presencia del Señor, para que os sea aceptada; la agitará el sacerdote el día siguiente al sábado.<br><br>
+                        El Señor habló a Moisés: Di a los israelitas: Cuando entréis en la tierra que yo os voy a dar, y seguís la mies, la primera gavilla se la llevaréis al sacerdote. Éste la agitará ritualmente en presencia del Señor, para que os sea aceptada; la agitará el sacerdote el día siguiente al sábado.<br><br>
                         
                         Pasadas siete semanas completas a contar desde el día siguiente al sábado -día en que lleváis la gavilla para la agitación ritual-, hasta el día siguiente al séptimo sábado, es decir, a los cincuenta días, haréis una nueva ofrenda al Señor.<br><br>
                         
@@ -112,7 +707,7 @@
                         </blockquote>
                     </div>
                 </div>
-                <img src="img/biblia-portada-antigua.jpg" alt="Biblia abierta" class="imagen-seccion">
+                <img src="img/biblia-portada-antigua.jpg" alt="Biblia abierta mostrando texto antiguo" class="imagen-seccion">
             </article>
             
             <div class="archivo-palabras">
@@ -128,6 +723,16 @@
                         <p class="palabra-texto">"Todo lo puedo en Cristo que me fortalece"</p>
                         <p class="palabra-referencia">Filipenses 4:13</p>
                     </article>
+                    <article class="palabra-card">
+                        <p class="palabra-fecha">Sábado, 12 de Agosto</p>
+                        <p class="palabra-texto">"Encomienda al Señor tus afanes, y él te sostendrá"</p>
+                        <p class="palabra-referencia">Salmo 55:22</p>
+                    </article>
+                    <article class="palabra-card">
+                        <p class="palabra-fecha">Viernes, 11 de Agosto</p>
+                        <p class="palabra-texto">"El amor es paciente, es bondadoso"</p>
+                        <p class="palabra-referencia">1 Corintios 13:4</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -136,20 +741,25 @@
         <section id="emprendedores" class="seccion-contenido">
             <h2 class="seccion-titulo">Emprendedores</h2>
             
-            <article class="emprendedor-destacado">
-                <img src="img/emprender.jpg" alt="Emprendedores" class="imagen-seccion">
+            <article class="emprendedor-destacado" aria-labelledby="emprendedores-title">
+                <img src="img/emprender.jpg" alt="Personas trabajando en un proyecto emprendedor" class="imagen-seccion">
                 <div class="texto-justificado">
                     <h3>Historias que inspiran</h3>
                     <p>En KuikoART valoramos el esfuerzo de quienes transforman sus sueños en realidad. Conoce las experiencias de emprendedores que comenzaron con poco y hoy son ejemplo de perseverancia.</p>
                     
                     <div class="emprendedor-card">
                         <h4>María González - Artesanía Textil</h4>
-                        <p>"De desempleada a exportar mis tejidos a 3 países. El secreto fue nunca dejar de aprender y mejorar cada día mi técnica."</p>
+                        <p>"De desempleada a exportar mis tejidos a 3 países. El secreto fue nunca dejar de aprender y mejorar cada día mi técnica. Empecé con una pequeña inversión en materiales básicos y hoy tengo un taller con 5 empleados que me ayudan a cumplir los pedidos internacionales."</p>
                     </div>
                     
                     <div class="emprendedor-card">
                         <h4>Carlos Mendoza - Diseño Sustentable</h4>
-                        <p>"Convertí materiales reciclados en piezas de diseño reconocidas internacionalmente. La clave fue ver valor donde otros ven desecho."</p>
+                        <p>"Convertí materiales reciclados en piezas de diseño reconocidas internacionalmente. La clave fue ver valor donde otros ven desecho. Cada pieza cuenta una historia de transformación, no solo de los materiales, sino también de mi vida. Hoy enseño a otros cómo encontrar oportunidades en lo aparentemente inservible."</p>
+                    </div>
+
+                    <div class="emprendedor-card">
+                        <h4>Lucía Fernández - Cerámica Tradicional</h4>
+                        <p>"Rescaté técnicas ancestrales de alfarería que estaban a punto de perderse. Lo que comenzó como un proyecto personal para preservar nuestra cultura se convirtió en un negocio sostenible que da trabajo a artesanos de mi comunidad. Ahora exportamos piezas únicas a galerías de Europa."</p>
                     </div>
                 </div>
             </article>
@@ -161,35 +771,46 @@
             
             <div class="historias-grid">
                 <article class="historia-card">
-                    <img src="img/kuiko.jpg" alt="Kuiko, 68 años" class="historia-imagen">
+                    <img src="img/kuiko.jpg" alt="Kuiko, mujer de 68 años sonriendo" class="historia-imagen">
                     <div class="texto-justificado">
                         <h3>Kuiko, 68 años</h3>
                         <blockquote>
                             "Mi vida en las montañas me enseñó que la resiliencia no es solo sobrevivir, sino encontrar belleza en la adversidad. Cada arruga es un mapa de mis viajes."
                         </blockquote>
-                        <p>Kuiko comparte cómo transformó las dificultades de su vida rural en arte que ahora adorna hogares en la ciudad.</p>
+                        <p>Kuiko comparte cómo transformó las dificultades de su vida rural en arte que ahora adorna hogares en la ciudad. Sus pinturas reflejan paisajes de su infancia y tradiciones casi olvidadas. "El arte me salvó cuando perdí a mi esposo; encontré en los pinceles una forma de seguir conversando con la vida".</p>
                     </div>
                 </article>
                 
                 <article class="historia-card">
-                    <img src="img/manos-blanco-negro.jpg" alt="Carlos, 55 años" class="historia-imagen">
+                    <img src="img/manos-blanco-negro.jpg" alt="Manos de Carlos, 55 años, mostrando sus trabajos" class="historia-imagen">
                     <div class="texto-justificado">
                         <h3>Carlos, 55 años</h3>
                         <blockquote>
                             "Estas manos han trabajado la tierra, acunado a mis hijos y escrito cartas de amor. Hoy, aunque temblorosas, siguen creando historias."
                         </blockquote>
-                        <p>La conmovedora historia de un campesino que encontró en el arte una forma de preservar sus memorias.</p>
+                        <p>La conmovedora historia de un campesino que encontró en el arte una forma de preservar sus memorias. Tras un accidente que le impidió seguir trabajando la tierra, Carlos descubrió la escultura en madera. "Tallar la madera es como cultivar la tierra: requiere paciencia, respeto y saber escuchar los materiales".</p>
                     </div>
                 </article>
                 
                 <article class="historia-card">
-                    <img src="img/portada-biblia.jpg" alt="Rosa, 80 años" class="historia-imagen">
+                    <img src="img/portada-biblia.jpg" alt="Rosa, 80 años, sosteniendo una Biblia antigua" class="historia-imagen">
                     <div class="texto-justificado">
                         <h3>Rosa, 80 años</h3>
                         <blockquote>
                             "Esta Biblia fue mi refugio en los días oscuros. Sus páginas guardan no solo fe, sino las flores secas que mi nieto me regaló hace décadas."
                         </blockquote>
-                        <p>Una abuela que transforma textos sagrados en obras de arte cargadas de significado personal.</p>
+                        <p>Una abuela que transforma textos sagrados en obras de arte cargadas de significado personal. Rosa crea "biblias ilustradas" donde combina caligrafía tradicional con elementos de su vida. "Cada página es un diálogo entre la palabra divina y mi historia personal. Es mi forma de orar con las manos".</p>
+                    </div>
+                </article>
+
+                <article class="historia-card">
+                    <img src="img/artista-joven.jpg" alt="Joven artista trabajando en su estudio" class="historia-imagen">
+                    <div class="texto-justificado">
+                        <h3>Martina, 24 años</h3>
+                        <blockquote>
+                            "El arte urbano me dio voz cuando me sentía invisible. Ahora mis murales hablan por quienes no son escuchados."
+                        </blockquote>
+                        <p>De las calles a las galerías, Martina transforma espacios públicos con murales que cuentan historias de su comunidad. "Empecé pintando de noche, sin permiso, porque necesitaba expresar lo que llevaba dentro. Hoy trabajo con vecinos para crear obras que reflejen nuestra identidad colectiva".</p>
                     </div>
                 </article>
             </div>
@@ -201,46 +822,66 @@
             <p class="lema">"Cuando hacemos con otros, rendimos más y nos cansamos menos"</p>
             
             <div class="texto-justificado">
-                <p>En KuikoART creemos en el poder de la colaboración. Nuestra red conecta voluntarios, artistas y comunidades para crear proyectos con impacto social a través del arte.</p>
+                <p>En KuikoART creemos en el poder de la colaboración. Nuestra red conecta voluntarios, artistas y comunidades para crear proyectos con impacto social a través del arte. Juntos transformamos realidades y tejemos vínculos que perduran más allá de las obras creadas.</p>
                 
                 <div class="proyecto-destacado">
-                    <img src="img/solidaridad.jpg" alt="Proyecto solidario" class="imagen-seccion">
-                    <h3>Proyectos Activos</h3>
-                    <ul>
-                        <li><strong>Talleres comunitarios:</strong> Espacios donde compartimos conocimientos y creamos juntos</li>
-                        <li><strong>Recolección de donaciones:</strong> Ayudamos a comunidades necesitadas con recursos básicos</li>
-                        <li><strong>Murales colaborativos:</strong> Embellecemos espacios públicos con arte creado por la comunidad</li>
-                    </ul>
+                    <img src="img/solidaridad.jpg" alt="Grupo de voluntarios trabajando juntos" class="imagen-seccion">
+                    <div>
+                        <h3>Proyectos Activos</h3>
+                        <ul>
+                            <li><strong>Talleres comunitarios:</strong> Espacios donde compartimos conocimientos y creamos juntos. Impartidos por artistas locales en barrios con escasos recursos culturales.</li>
+                            <li><strong>Recolección de donaciones:</strong> Ayudamos a comunidades necesitadas con recursos básicos y materiales artísticos para que nadie se quede sin expresarse.</li>
+                            <li><strong>Murales colaborativos:</strong> Embellecemos espacios públicos con arte creado por la comunidad, dando voz a historias locales a través del color.</li>
+                            <li><strong>Bibliotecas creativas:</strong> Creamos rincones de lectura y expresión artística en centros comunitarios y escuelas rurales.</li>
+                        </ul>
+                    </div>
                 </div>
                 
                 <h3>¿Quieres participar?</h3>
+                <p>Completa el siguiente formulario y nos pondremos en contacto contigo para que formes parte de nuestra red de solidaridad. Juntos creamos un mundo más hermoso y humano.</p>
+                
                 <form class="formulario-contacto" action="https://formsubmit.co/cmfaponte@gmail.com" method="POST">
                     <input type="hidden" name="_subject" value="Nuevo mensaje de Red de Solidaridad">
                     <input type="hidden" name="_next" value="https://tusitio.com/gracias.html">
+                    <input type="hidden" name="_captcha" value="false">
                     
                     <div class="form-group">
                         <label for="nombre">Nombre completo:</label>
-                        <input type="text" id="nombre" name="nombre" required>
+                        <input type="text" id="nombre" name="nombre" required aria-required="true">
                     </div>
                     
                     <div class="form-group">
                         <label for="email">Correo electrónico:</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" required aria-required="true">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefono">Teléfono (opcional):</label>
+                        <input type="tel" id="telefono" name="telefono">
                     </div>
                     
                     <div class="form-group">
                         <label for="interes">Área de interés:</label>
                         <select id="interes" name="interes">
+                            <option value="" selected disabled>Selecciona una opción</option>
                             <option value="talleres">Talleres comunitarios</option>
                             <option value="donaciones">Recolección de donaciones</option>
                             <option value="murales">Murales colaborativos</option>
+                            <option value="bibliotecas">Bibliotecas creativas</option>
                             <option value="otros">Otros</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
                         <label for="mensaje">Mensaje:</label>
-                        <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+                        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos sobre tus habilidades, disponibilidad y motivación para participar"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="newsletter" name="newsletter" checked>
+                            <label for="newsletter">Deseo recibir el boletín mensual con novedades y oportunidades</label>
+                        </div>
                     </div>
                     
                     <button type="submit" class="btn-enviar">Enviar solicitud</button>
@@ -254,6 +895,7 @@
             <div class="footer-section about">
                 <h3>KuikoART</h3>
                 <p>Arte y Diseño hasta la puerta de tu hogar</p>
+                <p>Transformando vidas a través de la creatividad desde 2010</p>
             </div>
             <div class="footer-section links">
                 <h3>Enlaces</h3>
@@ -262,16 +904,76 @@
                     <li><a href="tienda.html">Tienda</a></li>
                     <li><a href="talleres.html">Talleres</a></li>
                     <li><a href="historias.html">Historias de Vida</a></li>
+                    <li><a href="catalogo.html">Catálogo</a></li>
+                    <li><a href="blog.html">Blog</a></li>
                 </ul>
             </div>
             <div class="footer-section contact">
                 <h3>Contacto</h3>
                 <p><i class="fas fa-envelope"></i> cmfaponte@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +34 123 456 789</p>
+                <p><i class="fas fa-map-marker-alt"></i> Calle Creatividad, 23, Madrid</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
             &copy; <span id="year"></span> KuikoART | Todos los derechos reservados
         </div>
     </footer>
+
+    <script>
+        // Script para el año dinámico en el footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Script para el menú hamburguesa
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Script para animaciones al desplazarse
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.seccion-contenido').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Scroll suave para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Cerrar menú móvil si está abierto
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
-</html>
+            </html>
