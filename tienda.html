@@ -344,8 +344,8 @@
         .carrito-contenido {  
             background: var(--color-blanco);  
             width: 90%;  
-            max-width: 800px;  
-            max-height: 90vh;  
+            max-width: 700px;  /* REDUCIDO DE 800px */
+            max-height: 80vh;  /* REDUCIDO DE 90vh */
             border-radius: 10px;  
             overflow: hidden;  
             display: flex;  
@@ -374,7 +374,7 @@
         }  
 
         .carrito-body {  
-            padding: 1.5rem;  
+            padding: 1rem;  /* REDUCIDO DE 1.5rem */
             overflow-y: auto;  
             flex-grow: 1;  
         }  
@@ -460,7 +460,7 @@
 
         /* Formulario de pedido */  
         .formulario-pedido {  
-            padding: 1.5rem;  
+            padding: 1rem;  /* REDUCIDO DE 1.5rem */
             background: #f9f5ff;  
         }  
 
@@ -585,7 +585,7 @@
 
             .carrito-contenido {  
                 width: 95%;  
-                max-height: 85vh;  
+                max-height: 80vh;  /* REDUCIDO DE 85vh */
             }  
 
             /* Mejoras para el formulario en móviles */  
@@ -662,7 +662,7 @@
             display: flex;
             flex-direction: column;
             height: auto;
-            max-height: 90vh;
+            max-height: 80vh;  /* REDUCIDO */
         }
         
         .carrito-header {
@@ -692,7 +692,7 @@
             }
             
             .carrito-contenido {
-                max-height: 95vh;
+                max-height: 80vh;  /* REDUCIDO */
                 width: 95%;
             }
             
@@ -1284,10 +1284,7 @@
                         <option value="transferencia">Transferencia</option>  
                     </select>  
                 </div>  
-                <div class="form-group">  
-                    <label for="notas">Notas adicionales</label>  
-                    <textarea id="notas" rows="3" placeholder="Ej: Horario preferido para entrega..."></textarea>  
-                </div>  
+                <!-- NOTAS ADICIONALES ELIMINADAS -->
                 <div class="botones-pedido">  
                     <button class="btn-pedido btn-whatsapp" id="enviarWhatsapp">  
                         <i class="fab fa-whatsapp"></i> Enviar por WhatsApp  
@@ -1534,7 +1531,6 @@
             const telefono = document.getElementById('telefono').value || 'No especificado';  
             const direccion = document.getElementById('direccion').value || 'No especificado';  
             const metodoPago = document.getElementById('metodo-pago').value || 'No especificado';  
-            const notas = document.getElementById('notas').value || 'No hay notas adicionales';  
               
             let mensaje = `*Nuevo Pedido KuikoART*%0A%0A`;  
             mensaje += `*ID del Pedido:* ${pedidoID}%0A%0A`;  
@@ -1545,9 +1541,6 @@
               
             mensaje += `*💳 Método de Pago:*%0A`;  
             mensaje += `• ${metodoPago === 'efectivo' ? 'Efectivo' : (metodoPago === 'transferencia' ? 'Transferencia' : 'No especificado')}%0A%0A`;  
-              
-            mensaje += `*📝 Notas:*%0A`;  
-            mensaje += `• ${notas}%0A%0A`;  
               
             mensaje += `*🛒 Detalles del Pedido*%0A`;  
             carrito.forEach(item => {  
@@ -1577,7 +1570,6 @@
             const telefono = document.getElementById('telefono').value || 'No especificado';  
             const direccion = document.getElementById('direccion').value || 'No especificado';  
             const metodoPago = document.getElementById('metodo-pago').value || 'No especificado';  
-            const notas = document.getElementById('notas').value || 'No hay notas adicionales';  
               
             let asunto = `Nuevo Pedido KuikoART - ${pedidoID}`;  
               
@@ -1590,9 +1582,6 @@
               
             cuerpo += `💳 Método de Pago:\n`;  
             cuerpo += `• ${metodoPago === 'efectivo' ? 'Efectivo' : (metodoPago === 'transferencia' ? 'Transferencia' : 'No especificado')}\n\n`;  
-              
-            cuerpo += `📝 Notas:\n`;  
-            cuerpo += `• ${notas}\n\n`;  
               
             cuerpo += `🛒 Detalles del Pedido\n`;  
             carrito.forEach(item => {  
@@ -1622,4 +1611,4 @@
         }); 
     </script>
 </body>
-                            </html>
+    </html>
