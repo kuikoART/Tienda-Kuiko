@@ -186,6 +186,7 @@
         .producto-img-container {  
             height: 200px;  
             overflow: hidden;  
+            cursor: pointer;
         }  
 
         .producto-img {  
@@ -344,8 +345,8 @@
         .carrito-contenido {  
             background: var(--color-blanco);  
             width: 90%;  
-            max-width: 700px;  /* REDUCIDO DE 800px */
-            max-height: 80vh;  /* REDUCIDO DE 90vh */
+            max-width: 700px; 
+            max-height: 80vh; 
             border-radius: 10px;  
             overflow: hidden;  
             display: flex;  
@@ -374,7 +375,7 @@
         }  
 
         .carrito-body {  
-            padding: 1rem;  /* REDUCIDO DE 1.5rem */
+            padding: 1rem; 
             overflow-y: auto;  
             flex-grow: 1;  
         }  
@@ -460,7 +461,7 @@
 
         /* Formulario de pedido */  
         .formulario-pedido {  
-            padding: 1rem;  /* REDUCIDO DE 1.5rem */
+            padding: 1rem; 
             background: #f9f5ff;  
         }  
 
@@ -556,6 +557,54 @@
             font-size: 0.8rem;  
         }  
 
+        /* MODAL PARA IMAGEN AMPLIADA */
+        .imagen-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .imagen-modal-contenido {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .cerrar-imagen {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .cerrar-imagen:hover,
+        .cerrar-imagen:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* CAMBIOS SOLICITADOS */
+        
+        /* Botones de envío en la parte superior */
+        .botones-envio-container {
+            padding: 1rem;
+            background: #f9f5ff;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
         /* Responsive */  
         @media (max-width: 768px) {  
             .nav-links {  
@@ -585,10 +634,9 @@
 
             .carrito-contenido {  
                 width: 95%;  
-                max-height: 80vh;  /* REDUCIDO DE 85vh */
+                max-height: 80vh;
             }  
 
-            /* Mejoras para el formulario en móviles */  
             .formulario-pedido {  
                 padding: 1rem;  
             }  
@@ -662,7 +710,7 @@
             display: flex;
             flex-direction: column;
             height: auto;
-            max-height: 80vh;  /* REDUCIDO */
+            max-height: 80vh;
         }
         
         .carrito-header {
@@ -692,7 +740,7 @@
             }
             
             .carrito-contenido {
-                max-height: 80vh;  /* REDUCIDO */
+                max-height: 80vh;
                 width: 95%;
             }
             
@@ -1262,11 +1310,29 @@
             <div class="carrito-total">  
                 Total: <span id="carritoTotal">$0.00</span>  
             </div>  
+            
+            <!-- Nuevo contenedor para botones de envío -->
+            <div class="botones-envio-container">
+                <div class="botones-pedido">  
+                    <button class="btn-pedido btn-whatsapp" id="enviarWhatsapp">  
+                        <i class="fab fa-whatsapp"></i> Enviar por WhatsApp  
+                    </button>  
+                    <button class="btn-pedido btn-email" id="enviarEmail">  
+                        <i class="fas fa-envelope"></i> Enviar por Email  
+                    </button>  
+                </div>
+            </div>
+            
             <div class="formulario-pedido">  
                 <h3>Información del Cliente</h3>  
                 <div class="form-group">  
                     <label for="nombre">Nombre completo</label>  
                     <input type="text" id="nombre" placeholder="Ej: Ana Pérez García">  
+                </div>
+                <!-- Nuevo campo para C.I. -->
+                <div class="form-group">  
+                    <label for="ci">C.I.</label>  
+                    <input type="text" id="ci" placeholder="Ej: 12345678901">  
                 </div>  
                 <div class="form-group">  
                     <label for="telefono">Teléfono</label>  
@@ -1284,18 +1350,15 @@
                         <option value="transferencia">Transferencia</option>  
                     </select>  
                 </div>  
-                <!-- NOTAS ADICIONALES ELIMINADAS -->
-                <div class="botones-pedido">  
-                    <button class="btn-pedido btn-whatsapp" id="enviarWhatsapp">  
-                        <i class="fab fa-whatsapp"></i> Enviar por WhatsApp  
-                    </button>  
-                    <button class="btn-pedido btn-email" id="enviarEmail">  
-                        <i class="fas fa-envelope"></i> Enviar por Email  
-                    </button>  
-                </div>  
             </div>  
         </div>  
     </div>  
+
+    <!-- Modal para imagen ampliada -->
+    <div id="imagenModal" class="imagen-modal">
+        <span class="cerrar-imagen">&times;</span>
+        <img class="imagen-modal-contenido" id="imagenAmpliada">
+    </div>
 
     <!-- Notificación -->  
     <div class="notificacion" id="notificacion">  
@@ -1325,6 +1388,11 @@
         const notificacion = document.getElementById('notificacion');  
         const notificacionMensaje = document.getElementById('notificacionMensaje');  
         const notificacionId = document.getElementById('notificacionId');  
+        
+        // Modal de imagen ampliada
+        const imagenModal = document.getElementById('imagenModal');
+        const imagenAmpliada = document.getElementById('imagenAmpliada');
+        const cerrarImagen = document.querySelector('.cerrar-imagen');
           
         // Generar ID único para el pedido  
         function generarIDPedido() {  
@@ -1528,6 +1596,7 @@
             }  
               
             const nombre = document.getElementById('nombre').value || 'No especificado';  
+            const ci = document.getElementById('ci').value || 'No especificado';
             const telefono = document.getElementById('telefono').value || 'No especificado';  
             const direccion = document.getElementById('direccion').value || 'No especificado';  
             const metodoPago = document.getElementById('metodo-pago').value || 'No especificado';  
@@ -1536,6 +1605,7 @@
             mensaje += `*ID del Pedido:* ${pedidoID}%0A%0A`;  
             mensaje += `*📌 Información del Cliente*%0A`;  
             mensaje += `• *Nombre:* ${nombre}%0A`;  
+            mensaje += `• *C.I.:* ${ci}%0A`;  
             mensaje += `• *Teléfono:* ${telefono}%0A`;  
             mensaje += `• *Dirección:* ${direccion}%0A%0A`;  
               
@@ -1567,6 +1637,7 @@
             }  
               
             const nombre = document.getElementById('nombre').value || 'No especificado';  
+            const ci = document.getElementById('ci').value || 'No especificado';
             const telefono = document.getElementById('telefono').value || 'No especificado';  
             const direccion = document.getElementById('direccion').value || 'No especificado';  
             const metodoPago = document.getElementById('metodo-pago').value || 'No especificado';  
@@ -1577,6 +1648,7 @@
             cuerpo += `ID del Pedido: ${pedidoID}\n\n`;  
             cuerpo += `📌 Información del Cliente\n`;  
             cuerpo += `• Nombre: ${nombre}\n`;  
+            cuerpo += `• C.I.: ${ci}\n`;  
             cuerpo += `• Teléfono: ${telefono}\n`;  
             cuerpo += `• Dirección: ${direccion}\n\n`;  
               
@@ -1608,7 +1680,27 @@
             if (e.target === carritoModal) {  
                 cerrarModal();  
             }  
-        }); 
+        });
+        
+        // Funcionalidad para ver imágenes completas
+        const productoImgs = document.querySelectorAll('.producto-img');
+        
+        productoImgs.forEach(img => {
+            img.addEventListener('click', () => {
+                imagenModal.style.display = 'block';
+                imagenAmpliada.src = img.src;
+            });
+        });
+        
+        cerrarImagen.addEventListener('click', () => {
+            imagenModal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === imagenModal) {
+                imagenModal.style.display = 'none';
+            }
+        });
     </script>
 </body>
     </html>
