@@ -640,6 +640,66 @@
                 height: 250px;  
             }  
         }
+        
+        /* MODIFICACIONES SOLICITADAS */
+        
+        /* Hacer todos los campos del formulario opcionales */
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+        
+        .form-group input:required, 
+        .form-group select:required, 
+        .form-group textarea:required {
+            box-shadow: none;
+        }
+        
+        /* Mejorar la visualización del modal del carrito */
+        .carrito-contenido {
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            max-height: 90vh;
+        }
+        
+        .carrito-header {
+            position: sticky;
+            top: 0;
+        }
+        
+        .carrito-total {
+            position: sticky;
+            bottom: 0;
+        }
+        
+        .carrito-body {
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        
+        .formulario-pedido {
+            position: relative;
+        }
+        
+        /* Mejorar el desplazamiento en dispositivos móviles */
+        @media (max-width: 768px) {
+            .carrito-modal {
+                align-items: center;
+                padding: 10px;
+            }
+            
+            .carrito-contenido {
+                max-height: 95vh;
+                width: 95%;
+            }
+            
+            .carrito-body {
+                max-height: 50vh;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1206,11 +1266,11 @@
                 <h3>Información del Cliente</h3>  
                 <div class="form-group">  
                     <label for="nombre">Nombre completo</label>  
-                    <input type="text" id="nombre" placeholder="Ej: Ana Pérez García" required>  
+                    <input type="text" id="nombre" placeholder="Ej: Ana Pérez García">  
                 </div>  
                 <div class="form-group">  
                     <label for="telefono">Teléfono</label>  
-                    <input type="tel" id="telefono" placeholder="Ej: 5551234567" required>  
+                    <input type="tel" id="telefono" placeholder="Ej: 5551234567">  
                 </div>  
                 <div class="form-group">  
                     <label for="direccion">Dirección</label>  
@@ -1218,7 +1278,7 @@
                 </div>  
                 <div class="form-group">  
                     <label for="metodo-pago">Método de Pago</label>  
-                    <select id="metodo-pago" required>  
+                    <select id="metodo-pago">  
                         <option value="">Seleccione...</option>  
                         <option value="efectivo">Efectivo</option>  
                         <option value="transferencia">Transferencia</option>  
@@ -1562,4 +1622,4 @@
         }); 
     </script>
 </body>
-                </html>
+                            </html>
