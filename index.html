@@ -120,7 +120,8 @@
     .hero {
       position: relative;
       height: 80vh;
-      background: linear-gradient(135deg, #d35400 0%, #3498db 100%);
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                  url('https://images.unsplash.com/photo-1615529162924-f8605384963d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -146,15 +147,18 @@
     }
 
     .hero-content h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
       margin-bottom: 20px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      animation: fadeInDown 1s ease;
     }
 
     .hero-content p {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       margin-bottom: 30px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+      animation: fadeInUp 1s ease 0.3s forwards;
+      opacity: 0;
     }
 
     .hero-buttons {
@@ -162,6 +166,36 @@
       gap: 15px;
       justify-content: center;
       flex-wrap: wrap;
+      animation: fadeIn 1s ease 0.6s forwards;
+      opacity: 0;
+    }
+
+    /* Animaciones */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     /* Navbar */
@@ -221,7 +255,7 @@
 
     /* Sección destacada */
     .featured-section {
-      padding: 60px 0;
+      padding: 80px 0;
       background-color: var(--light-color);
     }
 
@@ -230,12 +264,17 @@
       background-color: white;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .featured-card:hover {
+      transform: translateY(-10px);
     }
 
     .featured-image {
       flex: 1;
-      min-height: 300px;
+      min-height: 350px;
       background-color: #e9ecef;
       display: flex;
       align-items: center;
@@ -252,7 +291,7 @@
 
     .featured-content {
       flex: 1;
-      padding: 30px;
+      padding: 40px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -262,84 +301,101 @@
       display: inline-block;
       background-color: var(--primary-color);
       color: white;
-      padding: 5px 10px;
+      padding: 8px 15px;
       border-radius: 5px;
-      font-size: 0.8rem;
-      margin-bottom: 15px;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      font-weight: bold;
     }
 
     /* Sección información */
     .info-section {
-      padding: 60px 0;
+      padding: 80px 0;
       background-color: white;
     }
 
     .section-title {
       text-align: center;
-      margin-bottom: 40px;
-      font-size: 2rem;
+      margin-bottom: 50px;
+      font-size: 2.5rem;
       color: var(--primary-color);
       position: relative;
+      padding-bottom: 15px;
     }
 
     .section-title::after {
       content: '';
       position: absolute;
-      bottom: -10px;
+      bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
+      width: 120px;
+      height: 4px;
       background-color: var(--primary-color);
+      border-radius: 2px;
     }
 
     .info-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
+      gap: 40px;
     }
 
     .info-card {
       background-color: var(--light-color);
-      padding: 30px;
+      padding: 40px 30px;
       border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
       text-align: center;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .info-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-15px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
     }
 
     .icon {
-      font-size: 2.5rem;
+      font-size: 3rem;
       color: var(--primary-color);
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
     .info-card h3 {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       color: var(--dark-color);
+      font-size: 1.4rem;
     }
 
     .info-card p {
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      line-height: 1.8;
     }
 
     .link {
       color: var(--primary-color);
       font-weight: bold;
       transition: color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
     }
 
     .link:hover {
       color: var(--secondary-color);
     }
 
+    .link i {
+      margin-left: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .link:hover i {
+      transform: translateX(5px);
+    }
+
     /* Slider de colaboradores */
     .partners-section {
-      padding: 60px 0;
+      padding: 80px 0;
       background-color: var(--light-color);
     }
 
@@ -348,11 +404,13 @@
       max-width: 100%;
       overflow: hidden;
       margin: 0 auto;
+      height: 150px;
     }
 
     .slider-track {
       display: flex;
-      transition: transform 0.5s ease;
+      height: 100%;
+      animation: slide 30s linear infinite;
     }
 
     .slide {
@@ -366,96 +424,53 @@
     .slide img {
       max-height: 100px;
       width: auto;
-      filter: grayscale(100%);
-      opacity: 0.7;
       transition: all 0.3s ease;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
     }
 
     .slide img:hover {
-      filter: grayscale(0);
-      opacity: 1;
+      transform: scale(1.1);
     }
 
-    .slider-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(255,255,255,0.7);
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      cursor: pointer;
-      z-index: 10;
-      transition: all 0.3s ease;
-    }
-
-    .slider-btn:hover {
-      background-color: white;
-    }
-
-    .prev {
-      left: 10px;
-    }
-
-    .next {
-      right: 10px;
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     /* Newsletter */
     .newsletter {
-      padding: 60px 0;
+      padding: 80px 0;
       background-color: var(--primary-color);
       color: white;
       text-align: center;
     }
 
     .newsletter h2 {
-      margin-bottom: 15px;
-      font-size: 2rem;
+      margin-bottom: 20px;
+      font-size: 2.5rem;
     }
 
     .newsletter p {
-      margin-bottom: 30px;
-      font-size: 1.1rem;
+      margin-bottom: 40px;
+      font-size: 1.2rem;
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
-    }
-
-    .newsletter-form {
-      display: flex;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .newsletter-form input {
-      flex: 1;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 50px 0 0 50px;
-      font-size: 1rem;
-    }
-
-    .newsletter-form button {
-      border-radius: 0 50px 50px 0;
-      border: none;
-      padding: 12px 24px;
+      line-height: 1.8;
     }
 
     /* Footer */
     .footer {
       background-color: var(--dark-color);
       color: white;
-      padding: 60px 0 20px;
+      padding: 80px 0 30px;
     }
 
     .footer-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 30px;
-      margin-bottom: 40px;
+      gap: 40px;
+      margin-bottom: 50px;
     }
 
     .footer-col {
@@ -463,15 +478,16 @@
     }
 
     .footer-logo {
-      max-width: 150px;
-      margin-bottom: 20px;
+      max-width: 180px;
+      margin-bottom: 25px;
+      filter: brightness(0) invert(1);
     }
 
     .footer-col h4 {
-      margin-bottom: 20px;
-      font-size: 1.2rem;
+      margin-bottom: 25px;
+      font-size: 1.4rem;
       position: relative;
-      padding-bottom: 10px;
+      padding-bottom: 15px;
     }
 
     .footer-col h4::after {
@@ -480,8 +496,9 @@
       bottom: 0;
       left: 0;
       width: 50px;
-      height: 2px;
+      height: 3px;
       background-color: var(--primary-color);
+      border-radius: 2px;
     }
 
     .footer-col ul {
@@ -489,25 +506,29 @@
     }
 
     .footer-col li {
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
     }
 
     .footer-col i {
-      margin-right: 10px;
+      margin-right: 12px;
       color: var(--primary-color);
+      min-width: 20px;
     }
 
     .social-links {
       display: flex;
       gap: 15px;
+      margin-top: 20px;
     }
 
     .social-links a {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       background-color: rgba(255,255,255,0.1);
       border-radius: 50%;
       transition: all 0.3s ease;
@@ -515,120 +536,161 @@
 
     .social-links a:hover {
       background-color: var(--primary-color);
-      transform: translateY(-3px);
+      transform: translateY(-5px);
     }
 
     .footer-bottom {
       text-align: center;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.9rem;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      font-size: 1rem;
     }
 
     /* Nuevas secciones */
     .products-section {
-      padding: 60px 0;
+      padding: 80px 0;
       background-color: white;
     }
     
     .products-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 30px;
     }
     
     .product-card {
       background-color: white;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
     }
     
     .product-card:hover {
       transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
     }
     
     .product-image {
-      height: 200px;
+      height: 250px;
       background-color: #f8f9fa;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 10px;
+      padding: 20px;
     }
     
     .product-image img {
-      max-height: 180px;
+      max-height: 200px;
       max-width: 100%;
       object-fit: contain;
+      transition: transform 0.5s ease;
+    }
+    
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
     }
     
     .product-info {
-      padding: 15px;
+      padding: 20px;
     }
     
     .product-info h3 {
-      margin-bottom: 10px;
-      font-size: 1.1rem;
+      margin-bottom: 15px;
+      font-size: 1.2rem;
       color: var(--dark-color);
     }
     
     .product-info .price {
       font-weight: bold;
       color: var(--primary-color);
-      font-size: 1.2rem;
-      margin-bottom: 10px;
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      display: block;
     }
     
     .testimonials-section {
-      padding: 60px 0;
+      padding: 80px 0;
       background-color: var(--light-color);
     }
     
     .testimonial-card {
       background-color: white;
       border-radius: 10px;
-      padding: 30px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
       margin: 0 20px;
+      position: relative;
+    }
+    
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 5rem;
+      color: rgba(211, 84, 0, 0.1);
+      font-family: Georgia, serif;
+      line-height: 1;
     }
     
     .testimonial-header {
       display: flex;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
     
     .testimonial-avatar {
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
-      background-color: #ddd;
-      margin-right: 15px;
+      background-color: #e9ecef;
+      margin-right: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       color: #666;
+      overflow: hidden;
+    }
+    
+    .testimonial-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     
     .testimonial-author h4 {
-      margin-bottom: 5px;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+    
+    .testimonial-author p {
+      color: #777;
+      font-size: 0.9rem;
     }
     
     .testimonial-stars {
       color: #f39c12;
+      font-size: 1.2rem;
+      margin-top: 5px;
     }
 
     /* Responsive Design */
+    @media (max-width: 1200px) {
+      .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
     @media (max-width: 992px) {
       .featured-card {
         flex-direction: column;
       }
       
       .featured-image {
-        min-height: 200px;
+        min-height: 300px;
       }
       
       .info-grid {
@@ -640,17 +702,17 @@
       }
       
       .products-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
     @media (max-width: 768px) {
       .hero {
-        height: 60vh;
+        height: 70vh;
       }
       
       .hero-content h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
       
       .nav-links {
@@ -665,22 +727,16 @@
         grid-template-columns: 1fr;
       }
       
-      .newsletter-form {
-        flex-direction: column;
-      }
-      
-      .newsletter-form input,
-      .newsletter-form button {
-        width: 100%;
-        border-radius: 50px;
-      }
-      
-      .newsletter-form button {
-        margin-top: 10px;
+      .footer-grid {
+        grid-template-columns: 1fr;
       }
       
       .products-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+      }
+      
+      .section-title {
+        font-size: 2rem;
       }
     }
 
@@ -693,12 +749,8 @@
         flex-direction: column;
       }
       
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .products-grid {
-        grid-template-columns: 1fr;
+      .featured-content {
+        padding: 30px 20px;
       }
     }
   </style>
@@ -733,19 +785,20 @@
     </div>
   </nav>
 
-  <!-- Sección Especial de la Semana -->
+  <!-- Sección Ayúdate Ayudando -->
   <section class="featured-section">
     <div class="container">
       <div class="featured-card">
         <div class="featured-image">
-          <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Programa Especial" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Ayúdate Ayudando" loading="lazy">
         </div>
         <div class="featured-content">
-          <span class="badge">Nuevo</span>
-          <h2>5 MINUTOS CON LIA</h2>
-          <p>Programa ESPECIAL de manualidades con la profesora Lay y sus invitados. Todos los lunes a las 12 M por Tele Turquino.</p>
-          <p>Disfruta de trucos y secretos exclusivos de manualidades, sorteos y la participación de emprendedoras especializadas.</p>
-          <a href="#" class="btn btn-outline">Ver programa</a>
+          <span class="badge">Sinergia Empresarial</span>
+          <h2>AYÚDATE AYUDANDO</h2>
+          <p>En KuikoART creemos en el poder transformador de la sinergia. Cuando los emprendedores unen sus talentos y recursos, crean un efecto multiplicador que acelera el crecimiento y abre nuevas oportunidades de negocio.</p>
+          <p>La colaboración estratégica permite escalar operaciones, acceder a mercados más amplios y crear soluciones innovadoras que benefician a todos los involucrados. En el mundo digital, esta sinergia es el combustible que impulsa el crecimiento exponencial.</p>
+          <p>Únete a nuestra red de colaboradores y descubre cómo juntos podemos alcanzar metas que individualmente serían imposibles. El éxito compartido es el camino hacia negocios más resilientes y rentables.</p>
+          <a href="#" class="btn btn-outline">Unirme a la red</a>
         </div>
       </div>
     </div>
@@ -759,18 +812,20 @@
         <article class="info-card">
           <i class="fas fa-users icon"></i>
           <h3>QUIÉNES SOMOS</h3>
-          <p>Somos un equipo de emprendedores y artistas que hacen de cada espacio un mejor lugar para vivir, donde usted lo sueña y nosotros lo hacemos realidad.</p>
+          <p>KuikoART es una tienda online especializada en arte decorativo y productos para el hogar. Nuestro equipo de artistas y diseñadores crea piezas únicas que transforman espacios ordinarios en ambientes extraordinarios, combinando creatividad con funcionalidad.</p>
+          <p>Nos dedicamos a ofrecer productos exclusivos que reflejan las últimas tendencias en decoración, manteniendo siempre altos estándares de calidad y originalidad.</p>
         </article>
         <article class="info-card">
           <i class="fas fa-hands-helping icon"></i>
           <h3>NUESTROS SERVICIOS</h3>
-          <p>No solo ofrecemos productos exclusivos y respondemos a los retos artísticos que nos piden. También colaboramos con emprendedores amigos, escalando sus ventas al anunciar sus productos.</p>
+          <p>Ofrecemos una amplia gama de servicios que incluyen venta de productos decorativos exclusivos, diseño personalizado de piezas, asesoría en decoración de interiores y promoción de emprendedores afiliados.</p>
+          <p>Destacamos por nuestro servicio al cliente personalizado, envíos seguros a todo el país y garantía de satisfacción en todos nuestros productos.</p>
         </article>
         <article class="info-card">
           <i class="fas fa-handshake icon"></i>
           <h3>COLABORADORES</h3>
-          <p>Hacemos con otros lo que solos no podemos, creando alianzas estratégicas que nos permiten hacer más y cansarnos menos.</p>
-          <a href="#" class="link">Ver colaboradores</a>
+          <p>Trabajamos con una red de talentosos artistas, artesanos y emprendedores que enriquecen nuestro catálogo con productos únicos. Estas colaboraciones estratégicas nos permiten ofrecer una variedad inigualable mientras apoyamos el crecimiento del ecosistema emprendedor.</p>
+          <a href="#" class="link">Ver colaboradores <i class="fas fa-arrow-right"></i></a>
         </article>
       </div>
     </div>
@@ -825,7 +880,7 @@
           </div>
         </div>
       </div>
-      <div style="text-align: center; margin-top: 30px;">
+      <div style="text-align: center; margin-top: 40px;">
         <a href="tienda.html" class="btn btn-primary">Ver todos los productos</a>
       </div>
     </div>
@@ -862,8 +917,6 @@
             <img src="decoharmony.jpg" alt="Decoharmony" loading="lazy">
           </div>
         </div>
-        <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
-        <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
       </div>
     </div>
   </section>
@@ -875,10 +928,11 @@
       <div class="testimonial-card">
         <div class="testimonial-header">
           <div class="testimonial-avatar">
-            <i class="fas fa-user"></i>
+            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="María Rodríguez">
           </div>
           <div class="testimonial-author">
             <h4>María Rodríguez</h4>
+            <p>Cliente desde 2023</p>
             <div class="testimonial-stars">
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
@@ -888,7 +942,7 @@
             </div>
           </div>
         </div>
-        <p>"Los productos de KuikoART transformaron completamente mi sala de estar. La calidad es excelente y el servicio al cliente fue excepcional. ¡Definitivamente volveré a comprar!"</p>
+        <p>"Los productos de KuikoART transformaron completamente mi sala de estar. La calidad es excelente y el servicio al cliente fue excepcional. Definitivamente volveré a comprar y recomendaré a mis amigos!"</p>
       </div>
     </div>
   </section>
@@ -898,11 +952,8 @@
     <div class="container">
       <div class="newsletter-content">
         <h2>Únete a nuestra comunidad</h2>
-        <p>Recibe noticias, promociones especiales y tips de decoración</p>
-        <form class="newsletter-form">
-          <input type="email" placeholder="Tu correo electrónico" required>
-          <button type="submit" class="btn btn-primary">Suscribirse</button>
-        </form>
+        <p>Recibe noticias exclusivas, promociones especiales y consejos de decoración directamente en tu correo</p>
+        <a href="mailto:cmfaponte@gmail.com?subject=Suscripción a KuikoART" class="btn btn-primary">Suscribirse</a>
       </div>
     </div>
   </section>
@@ -914,12 +965,19 @@
         <div class="footer-col">
           <img src="kuikoart.jpg" alt="KuikoART" class="footer-logo" style="max-height: 80px;">
           <p>Arte y diseño para transformar tu hogar</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/hector.aponte.avila.2025" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://instagram.com/avilahectoraponte" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://pinterest.com" target="_blank"><i class="fab fa-pinterest"></i></a>
+          </div>
         </div>
         <div class="footer-col">
           <h4>Enlaces</h4>
           <ul>
             <li><a href="index.html">Inicio</a></li>
             <li><a href="tienda.html">Tienda</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Eventos</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -928,14 +986,17 @@
             <li><i class="fas fa-envelope"></i> cmfaponte@gmail.com</li>
             <li><i class="fas fa-phone"></i> +53 53086152</li>
             <li><i class="fas fa-map-marker-alt"></i> Santiago de Cuba, Cuba</li>
+            <li><i class="fas fa-clock"></i> Lunes-Viernes: 9am - 5pm</li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Redes Sociales</h4>
-          <div class="social-links">
-            <a href="https://www.facebook.com/hector.aponte.avila.2025" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://instagram.com/avilahectoraponte" target="_blank"><i class="fab fa-instagram"></i></a>
-          </div>
+          <h4>Políticas</h4>
+          <ul>
+            <li><a href="#">Términos y condiciones</a></li>
+            <li><a href="#">Política de privacidad</a></li>
+            <li><a href="#">Devoluciones</a></li>
+            <li><a href="#">Envíos</a></li>
+          </ul>
         </div>
       </div>
       <div class="footer-bottom">
@@ -953,49 +1014,6 @@
   <!-- JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Slider functionality
-      const track = document.querySelector('.slider-track');
-      const slides = Array.from(document.querySelectorAll('.slide'));
-      const nextBtn = document.querySelector('.next');
-      const prevBtn = document.querySelector('.prev');
-      
-      const slideWidth = slides[0].getBoundingClientRect().width;
-      
-      // Arrange slides
-      slides.forEach((slide, index) => {
-        slide.style.left = slideWidth * index + 'px';
-      });
-      
-      // Move to slide
-      const moveToSlide = (track, currentSlide, targetSlide) => {
-        track.style.transform = 'translateX(-'+targetSlide.style.left+')';
-        currentSlide.classList.remove('current-slide');
-        targetSlide.classList.add('current-slide');
-      }
-      
-      // Event listeners
-      nextBtn.addEventListener('click', function() {
-        const currentSlide = document.querySelector('.current-slide') || slides[0];
-        const nextSlide = currentSlide.nextElementSibling || slides[0];
-        moveToSlide(track, currentSlide, nextSlide);
-      });
-      
-      prevBtn.addEventListener('click', function() {
-        const currentSlide = document.querySelector('.current-slide') || slides[0];
-        const prevSlide = currentSlide.previousElementSibling || slides[slides.length-1];
-        moveToSlide(track, currentSlide, prevSlide);
-      });
-      
-      // Set first slide as current
-      slides[0].classList.add('current-slide');
-      
-      // Auto slide
-      setInterval(() => {
-        const currentSlide = document.querySelector('.current-slide') || slides[0];
-        const nextSlide = currentSlide.nextElementSibling || slides[0];
-        moveToSlide(track, currentSlide, nextSlide);
-      }, 3000);
-      
       // Mobile menu toggle
       const mobileMenuBtn = document.querySelector('.mobile-menu');
       const navLinks = document.querySelector('.nav-links');
@@ -1018,4 +1036,4 @@
     });
   </script>
 </body>
-  </html>
+      </html>
